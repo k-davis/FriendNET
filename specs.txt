@@ -1,0 +1,28 @@
+Your connections are [1, 10]
+
+
+Deliverables
+Apr 9
+	Graph implementation
+	Simple Querying
+	Selection/explanation of special feature algs
+
+Apr 23
+	Best friend chain feature
+	progress on killer feature
+
+May 2
+	finish killer features
+	
+
+
+Deliverable 1
+	Load a friend network from a file
+	Text menu for queries:
+		Does a user exist?
+		Weight from user A to user B
+	Identify special algs:
+		BF chain: names of users on the friendliest chain between two people
+		2 Killer features
+			one of which should run over the entire graph
+
