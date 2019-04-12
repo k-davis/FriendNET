@@ -26,3 +26,7 @@ Deliverable 1
 		2 Killer features
 			one of which should run over the entire graph
 
+
+			
+BF Chain -
+ What's names of all users on the friendliest chain of people to get from user A to user B, or an indiciation that there is no path
