@@ -1,8 +1,22 @@
-{
-	"John": { "Sam": 3, "Max": 7, "David": 3, "Clair": 9 },
-	"Sam": { "John": 1, "Sarah": 5, "Clair": 9 },
-	"Max": { "John": 3, "Sarah": 7 },
-	"Sarah": { "John": 4, "David": 8 },
-	"David": { "Max": 4, "Claire": 5, "Sarah": 1 },
-	"Clair": { "Sam": 6, "David": 4 }
+{	
+	"Bob" : {"Tom": 5, "Luke": 2},
+	"Luke" : {"Bob": 7, "Hope": 5},
+	"Lisa" : {"Tom": 10},
+	"Tom" : {"Lisa":9, "Hope":4},
+	"Hope" : {"Luke":4, "Tom": 4},
+	
+	"Claire": {"Max": 4, "David": 3, "Sam": 5},
+	"Bruce": {"Mark": 7},
+	"Mark": {"Bruce":5, "Claire":4, "David":10},
+	"David": {"Claire":6, "Mark":4, "Sarah":3, "Maria":5},
+	
+	"Max": {"Sam": 3, "Adam": 5},
+	"Sam": {"Max": 2, "Sarah": 8, "Claire": 4},
+	"Adam": {"Max":4, "Sarah":7, "Kate":3},
+	"Sarah": {"Sam":9, "Adam":10, "Maria":2, "David":4},
+	
+	"Kate": {"Maria": 8, "Lee": 2, "Adam": 5},
+	"Lee": {"Kate": 4, "Louis": 4},
+	"Louis": {"Maria": 5, "Lee": 4},
+	"Maria": {"Louis": 9, "Kate": 9, "David": 1}
 }
