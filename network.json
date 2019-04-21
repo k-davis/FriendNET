@@ -5,7 +5,7 @@
 	"Tom" : {"Lisa":9, "Hope":4},
 	"Hope" : {"Luke":4, "Tom": 4},
 	
-	"Claire": {"Max": 4, "David": 3, "Sam": 5},
+	"Claire": {"David": 3, "Sam": 5, "Mark":4},
 	"Bruce": {"Mark": 7},
 	"Mark": {"Bruce":5, "Claire":4, "David":10},
 	"David": {"Claire":6, "Mark":4, "Sarah":3, "Maria":5},
@@ -18,5 +18,5 @@
 	"Kate": {"Maria": 8, "Lee": 2, "Adam": 5},
 	"Lee": {"Kate": 4, "Louis": 4},
 	"Louis": {"Maria": 5, "Lee": 4},
-	"Maria": {"Louis": 9, "Kate": 9, "David": 1}
+	"Maria": {"Louis": 9, "Kate": 9, "David": 1, "Sarah": 1}
 }

@@ -26,6 +26,9 @@ class Digraph:
     def get_best_friend_chain(self, source, dest):
         prev = self._get_dijkstra_prev_graph(source)
 
+        if prev[dest] == None:
+            print('No path exists between')
+
         path_stack = [dest]
         step = prev[dest]
 
@@ -51,15 +54,12 @@ class Digraph:
         dist[source] = 0
 
         while unvisited:
-            min_node = self._get_min_node(source, unvisited)
-            if min_node == None:
-                min_node = unvisited.pop()
-            else:
-                unvisited.remove(min_node)
+            unvisited.sort(key= lambda elem: dist[elem])
+            min_node = unvisited.pop(0)
             
             for nb in self._get_neighbors(min_node):
-                #if nb in unvisited:
                 path = dist[min_node] + self._bfc_cost(min_node, nb)
+              
                 if path < dist[nb]:
                     dist[nb] = path
                     previous[nb] = min_node

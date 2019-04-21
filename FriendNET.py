@@ -48,7 +48,6 @@ class FriendNET:
             self._menu.handle_input()
 
     def _load_graph(self, path):
-        print("Bout to load graph")
         self._graph = Digraph.Digraph(path)
 
     def view_edge(self):
@@ -77,7 +76,7 @@ class FriendNET:
             print(person + ' does not exist')
 
     def view_bfc(self):
-        people = input('Two two people? ').split(' ')
+        people = input('What two people? ').split(' ')
         for name in self._graph.get_best_friend_chain(people[0], people[1]):
             print(name)
 
