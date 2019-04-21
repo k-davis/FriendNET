@@ -30,3 +30,24 @@ Deliverable 1
 			
 BF Chain -
  What's names of all users on the friendliest chain of people to get from user A to user B, or an indiciation that there is no path
+
+
+
+
+
+Degrees of Seperation
+ def degree(source):
+	que = [source]
+	visited = [source]
+	degrs = {source: 0}
+
+	while que:
+		node = que.pop(o)
+		for nb in get_nbs(node):
+			if nb not in visited:
+				que.push(nb)
+				visited.add(nb)
+				degrs[nb] = degrs[node] + 1
+				print
+
+	
