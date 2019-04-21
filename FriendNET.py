@@ -40,6 +40,7 @@ class FriendNET:
         self._menu.create_menu_option('View connection',  self.view_edge)
         self._menu.create_menu_option(
             'Check if user exists', self.check_if_exists)
+        self._menu.create_menu_option('View best friend chain', self.view_bfc)
         self._menu.create_menu_option('Quit', self.menu_quit)
 
         while self._menu_loop_sentinal:
@@ -47,6 +48,7 @@ class FriendNET:
             self._menu.handle_input()
 
     def _load_graph(self, path):
+        print("Bout to load graph")
         self._graph = Digraph.Digraph(path)
 
     def view_edge(self):
@@ -73,6 +75,11 @@ class FriendNET:
             print(person + ' exists')
         else:
             print(person + ' does not exist')
+
+    def view_bfc(self):
+        people = input('Two two people? ').split(' ')
+        for name in self._graph.get_best_friend_chain(people[0], people[1]):
+            print(name)
 
     def menu_quit(self):
         self._menu_loop_sentinal = False

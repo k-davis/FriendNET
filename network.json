@@ -3,6 +3,6 @@
 	"Sam": { "John": 1, "Sarah": 5, "Clair": 9 },
 	"Max": { "John": 3, "Sarah": 7 },
 	"Sarah": { "John": 4, "David": 8 },
-	"David": { "Max": 4, "Claire": 5, "Sarah": 1 },
+	"David": { "Max": 4, "Clair": 5, "Sarah": 1 },
 	"Clair": { "Sam": 6, "David": 4 }
 }
