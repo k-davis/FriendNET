@@ -37,17 +37,51 @@ BF Chain -
 
 Degrees of Seperation
  def degree(source):
-	que = [source]
+	queue = [source]
 	visited = [source]
 	degrs = {source: 0}
 
-	while que:
-		node = que.pop(o)
+	while queue:
+		node = queue.pop(o)
 		for nb in get_nbs(node):
 			if nb not in visited:
-				que.push(nb)
+				queue.push(nb)
 				visited.add(nb)
 				degrs[nb] = degrs[node] + 1
 				print
 
 	
+
+
+Cliquer
+def cliquer(target):
+	gr_clone = graph 
+	num = get_num_islands(gr_clone)
+
+	while num < target:
+		degrade(gr_clone)
+		num = get_num_islands(gr_clone)
+
+def get_num_islands(graph):
+	unvisited = graph.get_nodes()
+
+	while unvisited:
+		node = unvisited.get(0)
+		traverse_island(node, graph, unvisited)
+
+def traverse_island(node, graph, unvisited):
+	unvisited.remove(node)
+	for nb in graph.get_nbs(node):
+		traverse_island(nb, graph, unvisited)
+
+def is_mutual_connection(a, b):
+	return gr[a][b] > 0 and gr[b][a] > 0
+	# check and make sure the relationship even exists
+
+def degrade(graph):
+	for node in graph 
+		for relationship in node:
+			graph[node][relationship] -= 1
+			
+			if graph[node][relationship] == 0:
+				delete graph[node][relationship]

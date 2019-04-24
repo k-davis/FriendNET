@@ -41,6 +41,7 @@ class FriendNET:
         self._menu.create_menu_option(
             'Check if user exists', self.check_if_exists)
         self._menu.create_menu_option('View best friend chain', self.view_bfc)
+        self._menu.create_menu_option('Degrees of seperation', self.degrees_of_seperation)
         self._menu.create_menu_option('Quit', self.menu_quit)
 
         while self._menu_loop_sentinal:
@@ -77,8 +78,19 @@ class FriendNET:
 
     def view_bfc(self):
         people = input('What two people? ').split(' ')
-        for name in self._graph.get_best_friend_chain(people[0], people[1]):
-            print(name)
+        chain = self._graph.get_best_friend_chain(people[0], people[1])
+        if chain:
+            for name in chain:
+                print(name)
+        else:
+            print("No path exists between " + people[0] + " and " + people[1])
+
+    def degrees_of_seperation(self):
+        person = input("From who? ")
+        degrees = self._graph.get_degrees_of_seperation(person)
+        degrees = sorted(degrees.items(), key= lambda elem : elem[1])
+        for elem in degrees:
+            print(elem)
 
     def menu_quit(self):
         self._menu_loop_sentinal = False

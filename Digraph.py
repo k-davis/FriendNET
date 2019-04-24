@@ -27,19 +27,20 @@ class Digraph:
         prev = self._get_dijkstra_prev_graph(source)
 
         if prev[dest] == None:
-            print('No path exists between')
+            return None
 
-        path_stack = [dest]
-        step = prev[dest]
+        else:
+            path_stack = [dest]
+            step = prev[dest]
 
-        while step != source:
-            path_stack.append(step)
-            step = prev[step]
-        path_stack.append(source)
+            while step != source:
+                path_stack.append(step)
+                step = prev[step]
+            path_stack.append(source)
 
-        path_stack.reverse()
+            path_stack.reverse()
 
-        return path_stack
+            return path_stack
         
         
     def _get_dijkstra_prev_graph(self, source):
@@ -88,4 +89,17 @@ class Digraph:
     def _get_neighbors(self, node):
         return self._graph[node].keys()
 
-    
+    def get_degrees_of_seperation(self, source):
+        que = [source]
+        visited = [source]
+        degrees = {source: 0}
+
+        while que:
+            cur = que.pop(0)
+            for nb in self._get_neighbors(cur):
+                if nb not in visited:
+                    que.append(nb)
+                    visited.append(nb)
+                    degrees[nb] = degrees[cur] + 1
+
+        return degrees
