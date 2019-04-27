@@ -1,3 +1,4 @@
+import copy
 import json
 
 infinity = float('inf')
@@ -58,7 +59,7 @@ class Digraph:
             unvisited.sort(key= lambda elem: dist[elem])
             min_node = unvisited.pop(0)
             
-            for nb in self._get_neighbors(min_node):
+            for nb in Digraph._get_neighbors(self._graph, min_node):
                 path = dist[min_node] + self._bfc_cost(min_node, nb)
               
                 if path < dist[nb]:
@@ -86,8 +87,8 @@ class Digraph:
     def _bfc_cost(self, source, dest):
         return 10 - self._graph[source][dest]
 
-    def _get_neighbors(self, node):
-        return self._graph[node].keys()
+    def _get_neighbors(graph, node):
+        return graph[node].keys()
 
     def get_degrees_of_seperation(self, source):
         que = [source]
@@ -96,10 +97,81 @@ class Digraph:
 
         while que:
             cur = que.pop(0)
-            for nb in self._get_neighbors(cur):
+            for nb in Digraph._get_neighbors(self._graph, cur):
                 if nb not in visited:
                     que.append(nb)
                     visited.append(nb)
                     degrees[nb] = degrees[cur] + 1
 
         return degrees
+
+    def group_into(self, target):
+        gr = copy.deepcopy(self._graph)
+        num = Digraph.get_num_islands(gr)
+        
+
+        while num < target:
+            Digraph._degrade(gr)
+            num = Digraph.get_num_islands(gr)
+            Digraph._display_cliques(gr)
+            print(num)
+
+        
+
+        Digraph._display_cliques(gr)
+
+    def get_num_islands(graph):
+        unvisited = list(graph.keys())
+        num_islands = 0
+
+        while unvisited:
+            num_islands += 1
+            node = unvisited[0]
+            Digraph._traverse_island(node, graph, unvisited)
+
+        return num_islands
+
+    def _traverse_island(node, graph, unvisited):
+        unvisited.remove(node)
+        for nb in Digraph._get_neighbors(graph, node):
+            if nb in unvisited:
+                Digraph._traverse_island(nb, graph, unvisited)
+
+    def _is_mutual_connection_present(graph, node_a, node_b):
+        a_to_b = node_b in graph[node_a].keys() and graph[node_a][node_b] > 0
+        b_to_a = node_a in graph[node_b].keys() and graph[node_b][node_a] > 0
+
+        return a_to_b and b_to_a
+
+    def _degrade(graph):
+        print('degrade')
+        for node in graph:
+            dead_connections = []
+            for nb in Digraph._get_neighbors(graph, node):
+                graph[node][nb] -= 1
+
+                if graph[node][nb] == 0:
+                    dead_connections.append(nb)
+            
+            for nb in dead_connections:
+                graph[node].pop(nb)
+        
+    def _display_cliques(graph):
+        print('Cliques:')
+        unvisited = list(graph.keys())
+        cur_island_num = 0
+        
+        while unvisited:
+            cur_island_num += 1
+            node = unvisited[0]
+            print(' -Clique ' + str(cur_island_num) + '-')
+            Digraph._print_island(node, graph, unvisited)
+            print()
+    
+    def _print_island(node, graph, unvisited):
+        unvisited.remove(node)
+        print(' ' + node)
+
+        for nb in Digraph._get_neighbors(graph, node):
+            if nb in unvisited:
+                Digraph._print_island(nb, graph, unvisited)

@@ -42,6 +42,7 @@ class FriendNET:
             'Check if user exists', self.check_if_exists)
         self._menu.create_menu_option('View best friend chain', self.view_bfc)
         self._menu.create_menu_option('Degrees of seperation', self.degrees_of_seperation)
+        self._menu.create_menu_option('Cliquer', self.cliquer)
         self._menu.create_menu_option('Quit', self.menu_quit)
 
         while self._menu_loop_sentinal:
@@ -91,6 +92,20 @@ class FriendNET:
         degrees = sorted(degrees.items(), key= lambda elem : elem[1])
         for elem in degrees:
             print(elem)
+
+    def cliquer(self):
+        is_bad_input = True
+        num = -1
+
+        while(is_bad_input):
+            num = input('Group into how many cliques? ')
+            try:
+                num = int(num)
+                is_bad_input = False
+            except ValueError:
+                print('Type must be int type.')
+        
+        self._graph.group_into(num)
 
     def menu_quit(self):
         self._menu_loop_sentinal = False
