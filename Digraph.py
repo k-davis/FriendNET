@@ -109,14 +109,12 @@ class Digraph:
         gr = copy.deepcopy(self._graph)
         num = Digraph.get_num_islands(gr)
         
+        if len(gr) < target:
+            target = len(gr)
 
         while num < target:
             Digraph._degrade(gr)
-            num = Digraph.get_num_islands(gr)
-            Digraph._display_cliques(gr)
-            print(num)
-
-        
+            num = Digraph.get_num_islands(gr)        
 
         Digraph._display_cliques(gr)
 
@@ -134,7 +132,7 @@ class Digraph:
     def _traverse_island(node, graph, unvisited):
         unvisited.remove(node)
         for nb in Digraph._get_neighbors(graph, node):
-            if nb in unvisited:
+            if Digraph._is_mutual_connection_present(graph, node, nb) and nb in unvisited:
                 Digraph._traverse_island(nb, graph, unvisited)
 
     def _is_mutual_connection_present(graph, node_a, node_b):
@@ -144,7 +142,6 @@ class Digraph:
         return a_to_b and b_to_a
 
     def _degrade(graph):
-        print('degrade')
         for node in graph:
             dead_connections = []
             for nb in Digraph._get_neighbors(graph, node):
@@ -173,5 +170,5 @@ class Digraph:
         print(' ' + node)
 
         for nb in Digraph._get_neighbors(graph, node):
-            if nb in unvisited:
+            if Digraph._is_mutual_connection_present(graph, node, nb) and nb in unvisited:
                 Digraph._print_island(nb, graph, unvisited)
