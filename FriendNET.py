@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+# Kasey Davis
 '''
 Algorithm Specification:
 BF Chain - derived via Dijkstra's Algorithm
@@ -41,7 +41,8 @@ class FriendNET:
         self._menu.create_menu_option(
             'Check if user exists', self.check_if_exists)
         self._menu.create_menu_option('View best friend chain', self.view_bfc)
-        self._menu.create_menu_option('Degrees of seperation', self.degrees_of_seperation)
+        self._menu.create_menu_option(
+            'Degrees of seperation', self.degrees_of_seperation)
         self._menu.create_menu_option('Cliquer', self.cliquer)
         self._menu.create_menu_option('Quit', self.menu_quit)
 
@@ -79,19 +80,34 @@ class FriendNET:
 
     def view_bfc(self):
         people = input('What two people? ').split(' ')
-        chain = self._graph.get_best_friend_chain(people[0], people[1])
-        if chain:
-            for name in chain:
-                print(name)
+
+        if len(people) != 2:
+            print("Invalid selection")
+        elif not self._graph.does_node_exist(people[0]):
+            print(people[0] + ' does not exist.')
+        elif not self._graph.does_node_exist(people[1]):
+            print(people[1] + ' does not exist.')
         else:
-            print("No path exists between " + people[0] + " and " + people[1])
+            chain = self._graph.get_best_friend_chain(people[0], people[1])
+            if chain:
+                print()
+                for name in chain:
+                    print(name)
+            else:
+                print("No path exists between " +
+                      people[0] + " and " + people[1])
 
     def degrees_of_seperation(self):
         person = input("From who? ")
-        degrees = self._graph.get_degrees_of_seperation(person)
-        degrees = sorted(degrees.items(), key= lambda elem : elem[1])
-        for elem in degrees:
-            print(elem)
+
+        if self._graph.does_node_exist(person):
+            degrees = self._graph.get_degrees_of_seperation(person)
+            degrees = sorted(degrees.items(), key=lambda elem: elem[1])
+            print()
+            for elem in degrees:
+                print(str(elem[0]) + ',\t  ' + str(elem[1]))
+        else:
+            print(person + ' does not exist.')
 
     def cliquer(self):
         is_bad_input = True
@@ -103,8 +119,8 @@ class FriendNET:
                 num = int(num)
                 is_bad_input = False
             except ValueError:
-                print('Type must be int type.')
-        
+                print('Number must be an integer.')
+
         self._graph.group_into(num)
 
     def menu_quit(self):

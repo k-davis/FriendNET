@@ -17,7 +17,7 @@ class Menu:
 
     def handle_input(self):
         choice = input('> ')
-
+        choice = choice.capitalize()
         while len(choice) != 1 or ord(choice) not in range(ord('A'), ord('A') + len(self._menu_options)):
             print('Invalid selection')
             choice = input('> ')
